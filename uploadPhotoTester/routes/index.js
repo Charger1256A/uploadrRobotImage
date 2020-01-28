@@ -14,5 +14,10 @@ router.post('/imageFile', function(req, res, next) {
     res.send(snapshot);
   })
 })
+exports.index = function(req, res) {
+  // send moment to your ejs
+  res.render('index', { exports: exports });
+}
+
 
 module.exports = router;

@@ -3,9 +3,9 @@ const fs = require('fs');
 
 console.log('test');
 cloudinary.config({
-    cloud_name: 'pictureofbots',
-    api_key: '123146783337381',
-    api_secret: 'lNSZHRwJJ5vprS25VBscSUy2Fe4'
+    cloud_name: 'palyscout',
+    api_key: '281289447429237',
+    api_secret: 'oAoGDruPGJ7Zq0KZZq7LNfqVjg4'
 
 });
 function imageFile(image) {

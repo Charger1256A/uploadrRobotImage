@@ -10,15 +10,20 @@
 
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script type="text/javascript">
-    var hello = "hello"
-    console.log(hello);
-    if (typeof hello !== 'undefined') {
-      console.log('hello')
-    } else {
-      console.log('is this working')
+    const input = document.getElementById('my_file')
+    const upload = (file) => {
+      fetch('/', {
+        method: 'POST',
+        headers: {
+
+        },
+        body: file
+      }).then(response => response.json()).then(success => console.log(succes + "it worked")).catch(error => console.log(error))
     }
-    exports.image = image
-    var image = document.getElementById('my_file').click();
+    const onSelectFile = () => upload(input);
+    input.addEventListener('change', onSelectFile, false);
+
+
   </script>
 </head>
 

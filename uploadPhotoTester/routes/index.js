@@ -5,9 +5,11 @@ const api = require('./cloudinaryApi.js')
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/', function(req, res, next) {
-  console.log("router working")
-  res.send('cloudinaryApi', { image: image });
+// This router is working
+router.post('/', function(req, res, next) {
+  console.log(req.body);
+  console.log("hello");
+  res.send('cloudinaryApi', { image: body });
 })
 router.post('/imageFile', function(req, res, next) {
   api.imageFile().then(snapshot => {

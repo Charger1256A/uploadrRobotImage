@@ -3,6 +3,10 @@
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<img width="250" height="250" id="placeholder" src="http://placehold.it/250x250&text='click to upload'">
+<input class="hidden" type="file" onchange="previewFile()" id="img-upload">
+
 <html>
 
 <head>
@@ -10,20 +14,35 @@
 
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script type="text/javascript">
-    const input = document.getElementById('my_file')
-    const upload = (file) => {
-      fetch('/', {
-        method: 'POST',
-        headers: {
+    $('#placeholder').click(function () {
+      $('#img-upload').trigger('click');
+    });
 
-        },
-        body: file
-      }).then(response => response.json()).then(success => console.log(succes + "it worked")).catch(error => console.log(error))
+    function previewFile() {
+      var preview = document.querySelector('img');
+      var inputfile = document.querySelector('input[type=file]').files[0];
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (inputfile) {
+        console.log(inputfile)
+        var img = reader.readAsDataURL(inputfile)
+        const upload = (img) => {
+          fetch('/', {
+            method: 'POST',
+            headers: {
+
+            },
+            body: img
+          }).then(response => response).then(success => console.log(success + "it worked")).catch(error => console.log(error))
+        }
+        const onSelectFile = () => upload(inputfile);
+        addEventListener('change', onSelectFile, false);
+      }
     }
-    const onSelectFile = () => upload(input);
-    input.addEventListener('change', onSelectFile, false);
-
-
   </script>
 </head>
 
@@ -31,7 +50,7 @@
   <h1>Upload Photo Test</h1>
   <p>Welcome to Upload Photo Test</p>
   <!-- <input type="button" id="get_file"> -->
-  <input type="file" id="my_file">
+  <!-- <input type="file" id="my_file"> -->
 </body>
 
 </html>
